@@ -17,7 +17,7 @@ public class UsuarioDAO {
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
         if(usuario.getIdUsuario() == 0){
-        sessao.save(usuario);
+            sessao.save(usuario);
         }else{
             editar(usuario);
         }
@@ -55,7 +55,7 @@ public class UsuarioDAO {
         return usuario;
     }
     
-     public Usuario autenticarUsuario(String login, String senha){
+    public Usuario autenticarUsuario(String login, String senha){
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
@@ -69,13 +69,12 @@ public class UsuarioDAO {
         return usuario != null ? usuario : null;
     }
     
-     public List<Usuario> listarUsuarios(){
+    public List<Usuario> listarUsuarios(){
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
-       List<Usuario> usuarios = sessao.
+        List<Usuario> usuarios = sessao.
                 createCriteria(Usuario.class).list();
-               
         sessao.close();
         return usuarios;
     }

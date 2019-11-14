@@ -1,8 +1,8 @@
 package univs.edu.funcionario;
 
-import univs.edu.funcionario.*;
-import java.util.ArrayList;
+import univs.edu.usuario.*;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -17,10 +17,12 @@ public class FuncionarioDAO {
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
-        if(funcionario.getIdFuncionario() == 0){
-        sessao.save(funcionario);
+        if(funcionario.getIdFuncionario()== 0){
+            sessao.save(funcionario);
+            JOptionPane.showMessageDialog(null, "Funcionário Cadastrado!");
         }else{
             editar(funcionario);
+            JOptionPane.showMessageDialog(null,"Funcionário editado!");
         }
         transacao.commit();
         sessao.close();
@@ -49,34 +51,19 @@ public class FuncionarioDAO {
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
         Funcionario funcionario = (Funcionario) sessao.
-                createCriteria(Funcionario.class)
+                createCriteria(Usuario.class)
                 .add(Restrictions.eq("idFuncionario", id))
                 .uniqueResult();
         sessao.close();
         return funcionario;
     }
     
-     public Funcionario autenticarFuncionario(String login, String senha){
+    public List<Funcionario> listarFuncionarios(){
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
-        Funcionario funcionario = (Funcionario) sessao.
-                createCriteria(Funcionario.class)
-                .add(Restrictions.eq("login", login))
-                .add(Restrictions.eq("senha", senha))
-                .uniqueResult();
-        sessao.close();
-        
-        return funcionario != null ? funcionario : null;
-    }
-    
-     public List<Funcionario> listarFuncionarios(){
-        sessao = HibernateUtil.
-                getSessionFactory().openSession();
-        transacao = sessao.beginTransaction();
-       List<Funcionario> funcionarios = sessao.
+        List<Funcionario> funcionarios = sessao.
                 createCriteria(Funcionario.class).list();
-               
         sessao.close();
         return funcionarios;
     }
