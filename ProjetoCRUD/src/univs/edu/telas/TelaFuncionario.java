@@ -40,12 +40,11 @@ public class TelaFuncionario extends javax.swing.JFrame {
     }
     
     public void preencherFuncionario(){
-    tfNome.setText(funcionario.getNomeFuncionario());
-    tfCPF.setText(funcionario.getCpf());
-    tfSalario.setText(String.valueOf(funcionario.getSalario()));
-    tfUsuario.setText(funcionario.getUsuario().getLogin());
-    jcCargo.setSelectedItem(funcionario.getCargo());
-    
+        tfNome.setText(funcionario.getNomeFuncionario());
+        tfCPF.setText(funcionario.getCpf());
+        tfSalario.setText(String.valueOf(funcionario.getSalario()));
+        tfUsuario.setText(funcionario.getUsuario().getLogin());
+        jcCargo.setSelectedItem(funcionario.getCargo());
     }
     
     
@@ -107,6 +106,13 @@ public class TelaFuncionario extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel7.setText("Usuário.:");
 
+        tfUsuario.setEnabled(false);
+        tfUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfUsuarioActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("Selecionar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +121,11 @@ public class TelaFuncionario extends javax.swing.JFrame {
         });
 
         jButton2.setText("Voltar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Salvar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +135,11 @@ public class TelaFuncionario extends javax.swing.JFrame {
         });
 
         jButton4.setText("Pesquisar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Limpar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -242,10 +258,24 @@ public class TelaFuncionario extends javax.swing.JFrame {
             funcionario.setSalario(Double.parseDouble(tfSalario.getText()));
             dao.salvar(funcionario);
             limparCampos();
-            }else{
+        }else{
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void tfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfUsuarioActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        TelaPesquisaFuncionario tela = new TelaPesquisaFuncionario();
+        tela.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
